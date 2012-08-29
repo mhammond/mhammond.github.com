@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<title>Python and Windows</title>
+
+<body>
+<!-- One section is one slide -->
+
+<section>
+    <h1>Python and Windows</h1>
+    <footer>Mark Hammond<br><small>mhammond@skippinet.com.au @skippyhammond</small></footer>
+</section>
+
+<section>
+    <p>About Me</p>
+    <ul class="incremental">
+        <li>Started with Python back 1993
+        <li>First port of Python for Windows
+        <li>pywin32 grew organically
+        <li>Member of the Python Software Foundation
+    </ul>
+</section>
+
+<section>
+    <h3>Python on Windows is popular</h3>
+    <ul class="incremental">
+        <li>Not just used by you Mac fans!
+        <li>Hard to get direct comparisons.
+        <li>750,000 - 1,000,000 installer downloads per month.
+        <li>Python 3 popular - around 1/2 those downloads.
+        <li>Most recent pywin32 - Python 2.x=160,000; 3.x=51,000
+        <li>Nearly 1000 downloads for Python 2.3!
+        <li>Plus ActiveState, Enthought, etc
+    </ul>
+</section>
+
+<section>
+    <h3>The 2 faces of Python on Windows (pre 2011)</h3>
+    <div class="incremental">
+        <p>CPython - A native port of Python on Windows.</p>
+        <p>IronPython - A port of Python using the .NET environment</p>
+    </div>
+    <details></details>
+</section>
+
+<section>
+    <h3>The 2 faces of Python on Windows (post 2011)</h3>
+    <div>
+        <p>CPython - A native port of Python on Windows.</p>
+        <p>IronPython - A port of Python using <s>the .NET environment</s></p>
+    </div>
+    <details>I'm not dead yet.  It's only a flesh-wound</details>
+</section>
+
+<section>
+    <figure> <!-- Figures are used to display images and videos fullpage -->
+      <img src="flesh-wound.jpg">
+      <figcaption style="color: white">It's only a flesh wound!</figcaption>
+    </figure>
+</section>
+
+<section>
+    <h3>The 2 faces of Python on Windows (post 2011)</h3>
+    <div>
+        <p>CPython - A native port of Python on Windows.</p>
+        <p>CPython + WinRT??</p>
+    </div>
+    <details>It's not at all clear how this is going to pan out.</details>
+</section>
+
+<section>
+    <h2>A minor digression</h2>
+    <p>Where is Windows heading?</p>
+</section>
+
+<section>
+    <h3>.NET was to be the future</h3>
+    <ul class="incremental">
+        <li>A "managed" virtual machine environment.
+        <br><small>Programs compiled to .NET byte-code instead of native machine-language</small>
+        <li>Fast JIT compilers means things usually are native when it matters
+    </ul>
+</section>
+
+<section>
+    <h3>.NET was to be safe</h3>
+    <ul class="incremental">
+        <li>Environment manages "safety" of programs:
+        <li>Prevents accidental errors such as invalid memory references.
+        <li>Prevents malicious code by enforcing access control.
+        <li>Think restricted environments such as your browser (eg, Silverlight)
+    </ul>
+</section>
+
+<section>
+    <h3>.NET was to be safe</h3>
+    <ul>
+        <li>Environment manages "safety" of programs:
+        <li>Prevents accidental errors such as invalid memory references.
+        <li>Prevents malicious code by enforcing access control.
+        <li>Think restricted environments <b>such as your browser</b> (eg, Silverlight)
+    </ul>
+</section>
+
+<section>
+    <h3>Windows 8/Metro</h3>
+    <ul class="incremental">
+        <li>Uses HTML5 apps plus a browser-based API
+        <li>Internet Explorer only
+        <li>.NET notable as an omission
+        <li>Silverlight appears dead.
+        <li>.NET isn't quite dead yet though.
+    </ul>
+    <details>Watch this space!</details>
+</section>
+
+<section>
+    <h3>You get what you pay for!</h3>
+    <p>Mark's free opinion</p>
+    <ul class="incremental">
+        <li>Many apps will be HTML5
+        <li>Browser-based APIs for most hardware resources
+        <li>IndexedDB, Session Storage, App Cache, etc
+        <li>All browsers creating "apps" concept - no "chrome"
+        <li>Mozilla's Boot2Gecko a case in point.
+        <li>But that's a long time away
+        <li>And not for all apps
+        <li>Your jobs are safe :)
+    </ul>
+</section>
+
+<section>
+    <h2>Python on Windows</h2>
+</section>
+
+
+<section>
+    <h3>CPython on Windows</h3>
+    <ul class="incremental">
+        <li>First-class support for Windows.
+            <small>Eg: Unicode APIs are preferred to offer seamless Unicode experience.</small>
+        <li>Tends to avoid platform-specific functionality
+            <small>Native windows functions are used to create a cross-platform environment</small>
+        <li>Not much Windows specific functionality is exposed
+        <li>ctypes or pywin32 is often used to fill in the gaps
+    </ul>
+<details>Much of CPython uses unicode windows apis</details>
+</section>
+
+<section>
+    <h3>Python for Windows Extensions</h3>
+    <div class="incremental">
+        <p>Expose Windows specific features</p>
+        <p>Broad coverage<br><small>native IO, services, networking, COM, UI, etc</small></p>
+        <p>stable and mature</p>
+        <p>Leveraged by many other projects;<br><small>things like twisted, mercurial etc all take advantage of pywin32 if found.</small></p>
+        <p>Downside: fairly large, not easy_install-able</p>
+    </div>
+</section>
+
+<section>
+    <h3>Cross-platform?</h3>
+        <p>Python has rich cross-platform support - why target Windows specific features?</p>
+        <ul class="incremental">
+            <li>Provide good experience for administrators.
+            <li>Provide good experience for users.
+            <li>Integrate with other languages and development environments.
+            <li>Provide a good experience for administrators
+        </ul>
+    <details>So if Python is cross-platform, why do I care about Windows specific features?</details>
+</section>
+
+<section>
+    <h3>For administrators</h3>
+    <ul class="incremental">
+        <li>NTLM/Kerberos<br><small>admins like the security of not providing passwords to applications.</small>
+        <li>Integrate with existing user roles<br><small>admins use Windows tools to grant access</small>
+        <li>Implement 'daemon' as a service<br><small>give administrators a single control point.</small>
+        <li>Integrated performance monitoring
+    </ul>
+</section>
+
+<section>
+    <h3>For users</h3>
+    <ul class="incremental">
+        <li>NTLM/Kerberos for convenience
+        <li>Use native widgets for navigating the file-system and shell namespace
+        <li>Leverage metadata stored in files
+        <li>Access printers, USB devices, etc
+    </ul>
+</section>
+
+<section>
+    <h3>Integrate with development tools</h3>
+    <ul class="incremental">
+        <li>Some shops have standardized on Windows, not Python
+        <li>Use Visual Studio as a development environment.
+        <li>Write reusable components in languages other than Python
+    </ul>
+</section>
+
+<section>
+    <h3>Windows Management Instrumentation (WMI)</h3>
+    <ul class="incremental">
+        <li>A (somewhat) consistent interface to common management tasks.
+        <li>Start a process on a remote computer
+        <li>Schedule a process
+        <li>Reboot a computer
+        <li>Query event log
+    </ul>
+</section>
+
+<section>
+    <h3>Windows Management Instrumentation (WMI)</h3>
+    <div class="incremental">
+        <p>But can't all these be done without WMI?
+        <p>Yes, but only with various low-level API calls.
+        <p>Which is the fallback if WMI can't do it...
+    </div>
+</section>
+
+<section>
+    <h3>WMI example</h3>
+    <p>Show all <code>automatic</code> services which are not running</p>
+    <pre>
+import wmi
+c = wmi.WMI()
+stopped = c.Win32_Service(StartMode="Auto", 
+                          State="Stopped")
+for s in stopped:
+    print s.Caption, "service is not running"
+    </pre>
+</section>
+
+<section>
+    <h3>Non WMI version</h3>
+    <div class="incremental">
+        <div>
+        <pre>
+    from win32service import (
+        OpenSCManager, EnumServicesStatus, QueryServiceConfig, 
+        OpenService, CloseServiceHandle, 
+        SC_MANAGER_ENUMERATE_SERVICE, SERVICE_WIN32, SERVICE_INACTIVE, 
+        SERVICE_ALL_ACCESS, SERVICE_AUTO_START)
+    hscm = OpenSCManager(None, None, SC_MANAGER_ENUMERATE_SERVICE)
+    for s in EnumServicesStatus(hscm, SERVICE_WIN32, SERVICE_INACTIVE):
+        hs = OpenService(hscm, s[0], SERVICE_ALL_ACCESS)
+        c = QueryServiceConfig(hs)
+        if c[1] == SERVICE_AUTO_START:
+            print name, "is not running"
+        CloseServiceHandle(hs)
+        </pre>
+        </div>
+        <img class="cross" alt="evil" src="red-cross.svg">
+    </div>
+    <details>Don't try and understand it, but instead marvel at the amount
+    of domain knowledge needed to even start.</details>
+</section>
+
+<section>
+    <h3>WMI availability</h3>
+    <ul class="incremental">
+        <li>Available on Windows 2000 and later.
+        <li>Comes with pywin32 but maintained by Tim Golden<br><small>it requires pywin32's COM support</small>
+    </ul>
+</section>
+
+<section>
+    <h3>Packaging Python apps - py2exe</h3>
+    <ul class="incremental">
+        <li>Supports bundling an app and all dependencies.
+        <li>A single package - possibly even a single executable.
+        <li>No need to install Python on the target
+        <li>Good pywin32 support - COM, services, etc
+    </ul>
+</section>
+    
+<section>
+    <h1>What's new with Python on Windows?</h1>
+</section>
+
+<section>
+    <h2>Python Launcher</h2>
+</section>
+
+<section>
+    <h3>Python launcher</h3>
+    <div class="incremental">
+        <p>PEP 397</p>
+        <p>'Shebang' processing for Windows</p>
+        <p>Useful from the command-line too.</p>
+        <p>Installed with Python 3.3 <small>and available separately</small></p>
+    </div>
+</section>
+
+<section>
+    <h3>Python launcher - why now?</h3>
+    <div class="incremental"> 
+        <p>Previously 'last version installed wins'</p>
+        <ul>
+            <li>Not really a problem with 2.x series.
+        </ul>
+        <p>Python 3.x made this a real problem.</p>
+        <ul>
+            <li>Each script is tied to a specific version.
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h3>Launcher Shebang processing</h3>
+    <div class="incremental">
+        <p>Compatible with *nix shebang lines.</p>
+        <ul>
+            <li>&nbsp;&nbsp;<code>#! /usr/bin/python</code>
+            <li>&nbsp;&nbsp;<code>#! /usr/bin/env python</code>
+        </ul>
+        <p>Windows specific shebang lines.</p>
+        <ul>
+            <li>&nbsp;<code>#! c:\python27\python.exe</code>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h3>Version specific shebang lines</h3>
+    <div class="incremental">
+        <p>Symlinks are often used on Linux to specify a version.</p>
+        <ul>
+            <li>&nbsp;&nbsp;<code>#! /usr/bin/python3</code>
+        </ul>
+        <p>Launcher supports version numbers too</p>
+        <ul>
+            <li>&nbsp;&nbsp;<code>#! /usr/bin/python3</code>
+            <li>&nbsp;&nbsp;<code>#! /usr/bin/python2.7</code>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h3>Launcher on the command-line</h3>
+    <div class="incremental">
+        <div>
+            <p><code>c:\&gt;&nbsp;py script.py</code><br>
+            Launches the latest installed Python 2.x<br>
+            No need for them all to be on the PATH</p>
+        </div>
+        <div>
+            <p><code>c:\&gt;&nbsp;py -3.2 script.py</code><br>
+            Launches Python 3.2</p>
+        </div>
+        <div>
+            <p><code>c:\&gt;&nbsp;py -3.3-32 script.py</code><br>
+            Launches a 32bit version of Python 3.3</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <h3>Full Unicode Implementation in 3.x</h3>
+    <p>All use of Windows API by core Python uses Unicode</p>
+    <p><small>Implementation detail which is completely invisible, but
+    still nice!</small></p>
+</section>
+
+<section>
+    <h3>Optionally add Python to the PATH</h3>
+    <ul class="incremental">
+        <li>New installer option to add Python to the PATH.
+        <li>Off by default - hard to get right with multiple versions.
+        <li>Less relevant now the launcher exists
+    </ul>
+</section>
+
+<section>
+    <h3>Links</h3>
+    <ul class="incremental">
+        <li><code>os.symlink</code> <em>might</em> be able to create symbolic links.
+        <li>Sadly requires special Windows permissions. "Run as Administrator" or you get IOError.
+        <li>This probably means it is less useful than it sounds.
+        <li><code>os.link</code> also works with saner semantics</li>
+    </ul>
+</section>
+
+<section>
+    <h3>os.kill</h3>
+    <div class="incremental">
+        <p><code>os.kill</code> does something useful on Windows.
+        <p>Slightly different semantics and usage than *nix.
+        <p>RTFM
+    </div>
+</section>
+
+<section>
+    <h3>VirtualEnv</h3>
+    <div class="incremental">
+        <p>VirtualEnv is a tool to create isolated Python environments.
+        <p>Now built into Python itself.
+        <p>Includes support for Windows
+        <p>Makes an existing useful tool even more useful!
+    </div>
+</section>
+
+<section>
+    <h3>Using new MSVC</h3>
+    <div class="incremental">
+        <p>3.3 uses Microsoft Visual C++ 2010
+        <p>End to manifest hell
+        <p>No visible change.
+        <p>Extension authors must upgrade compiler
+    </div>
+</section>
+
+<section>
+    <h3>Summary</h3>
+    <ul class="incremental">
+        <li>Python is extremely popular on Windows.
+        <li>Will continue to follow new innovations on the platform.
+        <li>Will continue to work with older "innovations" on the platform.
+        <li>Continues to listen to users about what support is necessary.
+        <li>Can make working with Windows less painful.
+    </ul>
+</section>    
+
+<section>
+    <h2>Questions?</h2>
+</section>
+</body>
+
+<!-- Your Style -->
+<style>
+.cross {
+    position:absolute;
+    left:-0%;
+    top:-20%;
+    width: 200%;
+    height: 200%";
+    opacity: 0.8;
+}
+
+pre {
+    overflow: hidden;
+}
+
+</style>
+<!-- Define the style of your presentation -->
+
+<style>
+  html, .view body { background-color: black; counter-reset: slideidx; }
+  body, .view section { background-color: white; border-radius: 12px }
+  /* A section is a slide. It's size is 800x600, and this will never change */
+  section, .view head > title {
+      // font-family: 'Oswald', arial, serif;
+      font-size: 30px;
+  }
+
+  .view section:after {
+    counter-increment: slideidx;
+    content: counter(slideidx, decimal-leading-zero);
+    position: absolute; bottom: -80px; right: 100px;
+    color: white;
+  }
+
+  .view head > title {
+    color: white;
+    text-align: center;
+    margin: 1em 0 1em 0;
+  }
+
+  h1, h2 {
+    margin-top: 200px;
+    text-align: center;
+    font-size: 80px;
+  }
+  h3 {
+    margin: 50px 0 50px 100px;
+  }
+
+  ul {
+      margin: 50px 100px;
+  }
+
+  p {
+    margin: 50px;
+    font-size: 40px;
+  }
+
+  blockquote {
+    height: 100%;
+    background-color: black;
+    color: white;
+    font-size: 60px;
+    padding: 50px;
+  }
+  blockquote:before {
+    content: open-quote;
+  }
+  blockquote:after {
+    content: close-quote;
+  }
+
+  /* Figures are displayed full-page, with the caption
+     on top of the image/video */
+  figure {
+    background-color: black;
+    width: 100%;
+    height: 100%;
+  }
+  figure > * {
+    position: absolute;
+  }
+  figure > img, figure > video {
+    width: 100%; height: 100%;
+  }
+  figcaption {
+    margin: 70px;
+    font-size: 50px;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 40px;
+    text-align: right;
+    background-color: #F3F4F8;
+    border-top: 1px solid #CCC;
+  }
+
+  /* Transition effect */
+  /* Feel free to change the transition effect for original
+     animations. See here:
+     https://developer.mozilla.org/en/CSS/CSS_transitions
+     How to use CSS3 Transitions: */
+  section {
+    -moz-transition: left 400ms linear 0s;
+    -webkit-transition: left 400ms linear 0s;
+    -ms-transition: left 400ms linear 0s;
+    transition: left 400ms linear 0s;
+  }
+  .view section {
+    -moz-transition: none;
+    -webkit-transition: none;
+    -ms-transition: none;
+    transition: none;
+  }
+
+  .view section[aria-selected] {
+    border: 5px red solid;
+  }
+
+  /* Before */
+  section { left: -150%; }
+  /* Now */
+  section[aria-selected] { left: 0; }
+  /* After */
+  section[aria-selected] ~ section { left: +150%; }
+
+  /* Incremental elements */
+
+  /* By default, visible */
+  .incremental > * { opacity: 1; }
+
+  /* The current item */
+  .incremental > *[aria-selected] { opacity: 1; }
+
+  /* The items to-be-selected */
+  .incremental > *[aria-selected] ~ * { opacity: 0; }
+
+  /* The progressbar, at the bottom of the slides, show the global
+     progress of the presentation. */
+  #progress-bar {
+    height: 2px;
+    background: #AAA;
+  }
+</style>
+
+<!-- {{{{ dzslides core
+#
+#
+#     __  __  __       .  __   ___  __
+#    |  \  / /__` |    | |  \ |__  /__`
+#    |__/ /_ .__/ |___ | |__/ |___ .__/ core :€
+#
+#
+# The following block of code is not supposed to be edited.
+# But if you want to change the behavior of these slides,
+# feel free to hack it!
+#
+-->
+
+<div id="progress-bar"></div>
+
+<!-- Default Style -->
+<style>
+  * { margin: 0; padding: 0; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+  details { display: none; }
+  body {
+    width: 800px; height: 600px;
+    margin-left: -400px; margin-top: -300px;
+    position: absolute; top: 50%; left: 50%;
+    overflow: hidden;
+    display: none;
+  }
+  .view body {
+    position: static;
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    display: inline-block;
+    overflow: visible; overflow-x: hidden;
+    /* undo Dz.onresize */
+    transform: none !important;
+    -moz-transform: none !important;
+    -webkit-transform: none !important;
+    -o-transform: none !important;
+    -ms-transform: none !important;
+  }
+  .view head, .view head > title { display: block }
+  section {
+    position: absolute;
+    pointer-events: none;
+    width: 100%; height: 100%;
+  }
+  .view section {
+    pointer-events: auto;
+    position: static;
+    width: 800px; height: 600px;
+    margin: -150px -200px;
+    float: left;
+
+    transform: scale(.4);
+    -moz-transform: scale(.4);
+    -webkit-transform: scale(.4);
+    -o-transform: scale(.4);
+    -ms-transform: scale(.4);
+  }
+  .view section > * { pointer-events: none; }
+  section[aria-selected] { pointer-events: auto; }
+  html { overflow: hidden; }
+  html.view { overflow: visible; }
+  body.loaded { display: block; }
+  .incremental {visibility: hidden; }
+  .incremental[active] {visibility: visible; }
+  #progress-bar{
+    bottom: 0;
+    position: absolute;
+    -moz-transition: width 400ms linear 0s;
+    -webkit-transition: width 400ms linear 0s;
+    -ms-transition: width 400ms linear 0s;
+    transition: width 400ms linear 0s;
+  }
+  .view #progress-bar {
+    display: none;
+  }
+</style>
+
+<script>
+  var Dz = {
+    remoteWindows: [],
+    idx: -1,
+    step: 0,
+    html: null,
+    slides: null,
+    progressBar : null,
+    params: {
+      autoplay: "1"
+    }
+  };
+
+  Dz.init = function() {
+    document.body.className = "loaded";
+    this.slides = Array.prototype.slice.call($$("body > section"));
+    this.progressBar = $("#progress-bar");
+    this.html = document.body.parentNode;
+    this.setupParams();
+    this.onhashchange();
+    this.setupTouchEvents();
+    this.onresize();
+    this.setupView();
+  }
+
+  Dz.setupParams = function() {
+    var p = window.location.search.substr(1).split('&');
+    p.forEach(function(e, i, a) {
+      var keyVal = e.split('=');
+      Dz.params[keyVal[0]] = decodeURIComponent(keyVal[1]);
+    });
+  // Specific params handling
+    if (!+this.params.autoplay)
+      $$.forEach($$("video"), function(v){ v.controls = true });
+  }
+
+  Dz.onkeydown = function(aEvent) {
+    // Don't intercept keyboard shortcuts
+    if (aEvent.altKey
+      || aEvent.ctrlKey
+      || aEvent.metaKey
+      || aEvent.shiftKey) {
+      return;
+    }
+    if ( aEvent.keyCode == 37 // left arrow
+      || aEvent.keyCode == 38 // up arrow
+      || aEvent.keyCode == 33 // page up
+    ) {
+      aEvent.preventDefault();
+      this.back();
+    }
+    if ( aEvent.keyCode == 39 // right arrow
+      || aEvent.keyCode == 40 // down arrow
+      || aEvent.keyCode == 34 // page down
+    ) {
+      aEvent.preventDefault();
+      this.forward();
+    }
+    if (aEvent.keyCode == 35) { // end
+      aEvent.preventDefault();
+      this.goEnd();
+    }
+    if (aEvent.keyCode == 36) { // home
+      aEvent.preventDefault();
+      this.goStart();
+    }
+    if (aEvent.keyCode == 32) { // space
+      aEvent.preventDefault();
+      this.toggleContent();
+    }
+    if (aEvent.keyCode == 70) { // f
+      aEvent.preventDefault();
+      this.goFullscreen();
+    }
+    if (aEvent.keyCode == 79) { // o
+      aEvent.preventDefault();
+      this.toggleView();
+    }
+  }
+
+  /* Touch Events */
+
+  Dz.setupTouchEvents = function() {
+    var orgX, newX;
+    var tracking = false;
+
+    var db = document.body;
+    db.addEventListener("touchstart", start.bind(this), false);
+    db.addEventListener("touchmove", move.bind(this), false);
+
+    function start(aEvent) {
+      aEvent.preventDefault();
+      tracking = true;
+      orgX = aEvent.changedTouches[0].pageX;
+    }
+
+    function move(aEvent) {
+      if (!tracking) return;
+      newX = aEvent.changedTouches[0].pageX;
+      if (orgX - newX > 100) {
+        tracking = false;
+        this.forward();
+      } else {
+        if (orgX - newX < -100) {
+          tracking = false;
+          this.back();
+        }
+      }
+    }
+  }
+
+  Dz.setupView = function() {
+    document.body.addEventListener("click", function ( e ) {
+      if (!Dz.html.classList.contains("view")) return;
+      if (!e.target || e.target.nodeName != "SECTION") return;
+
+      Dz.html.classList.remove("view");
+      Dz.setCursor(Dz.slides.indexOf(e.target) + 1);
+    }, false);
+  }
+
+  /* Adapt the size of the slides to the window */
+
+  Dz.onresize = function() {
+    var db = document.body;
+    var sx = db.clientWidth / window.innerWidth;
+    var sy = db.clientHeight / window.innerHeight;
+    var transform = "scale(" + (1/Math.max(sx, sy)) + ")";
+
+    db.style.MozTransform = transform;
+    db.style.WebkitTransform = transform;
+    db.style.OTransform = transform;
+    db.style.msTransform = transform;
+    db.style.transform = transform;
+  }
+
+
+  Dz.getDetails = function(aIdx) {
+    var s = $("section:nth-of-type(" + aIdx + ")");
+    var d = s.$("details");
+    return d ? d.innerHTML : "";
+  }
+
+  Dz.onmessage = function(aEvent) {
+    var argv = aEvent.data.split(" "), argc = argv.length;
+    argv.forEach(function(e, i, a) { a[i] = decodeURIComponent(e) });
+    var win = aEvent.source;
+    if (argv[0] === "REGISTER" && argc === 1) {
+      this.remoteWindows.push(win);
+      this.postMsg(win, "REGISTERED", document.title, this.slides.length);
+      this.postMsg(win, "CURSOR", this.idx + "." + this.step);
+      return;
+    }
+    if (argv[0] === "BACK" && argc === 1)
+      this.back();
+    if (argv[0] === "FORWARD" && argc === 1)
+      this.forward();
+    if (argv[0] === "START" && argc === 1)
+      this.goStart();
+    if (argv[0] === "END" && argc === 1)
+      this.goEnd();
+    if (argv[0] === "TOGGLE_CONTENT" && argc === 1)
+      this.toggleContent();
+    if (argv[0] === "SET_CURSOR" && argc === 2)
+      window.location.hash = "#" + argv[1];
+    if (argv[0] === "GET_CURSOR" && argc === 1)
+      this.postMsg(win, "CURSOR", this.idx + "." + this.step);
+    if (argv[0] === "GET_NOTES" && argc === 1)
+      this.postMsg(win, "NOTES", this.getDetails(this.idx));
+  }
+
+  Dz.toggleContent = function() {
+    // If a Video is present in this new slide, play it.
+    // If a Video is present in the previous slide, stop it.
+    var s = $("section[aria-selected]");
+    if (s) {
+      var video = s.$("video");
+      if (video) {
+        if (video.ended || video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
+    }
+  }
+
+  Dz.setCursor = function(aIdx, aStep) {
+    // If the user change the slide number in the URL bar, jump
+    // to this slide.
+    aStep = (aStep != 0 && typeof aStep !== "undefined") ? "." + aStep : ".0";
+    window.location.hash = "#" + aIdx + aStep;
+  }
+
+  Dz.onhashchange = function() {
+    var cursor = window.location.hash.split("#"),
+        newidx = 1,
+        newstep = 0;
+    if (cursor.length == 2) {
+      newidx = ~~cursor[1].split(".")[0];
+      newstep = ~~cursor[1].split(".")[1];
+      if (newstep > Dz.slides[newidx - 1].$$('.incremental > *').length) {
+        newstep = 0;
+        newidx++;
+      }
+    }
+    this.setProgress(newidx, newstep);
+    if (newidx != this.idx) {
+      this.setSlide(newidx);
+    }
+    if (newstep != this.step) {
+      this.setIncremental(newstep);
+    }
+    for (var i = 0; i < this.remoteWindows.length; i++) {
+      this.postMsg(this.remoteWindows[i], "CURSOR", this.idx + "." + this.step);
+    }
+  }
+
+  Dz.back = function() {
+    if (this.idx == 1 && this.step == 0) {
+      return;
+    }
+    if (this.step == 0) {
+      this.setCursor(this.idx - 1,
+                     this.slides[this.idx - 2].$$('.incremental > *').length);
+    } else {
+      this.setCursor(this.idx, this.step - 1);
+    }
+  }
+
+  Dz.forward = function() {
+    if (this.idx >= this.slides.length &&
+        this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
+        return;
+    }
+    if (this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
+      this.setCursor(this.idx + 1, 0);
+    } else {
+      this.setCursor(this.idx, this.step + 1);
+    }
+  }
+
+  Dz.goStart = function() {
+    this.setCursor(1, 0);
+  }
+
+  Dz.goEnd = function() {
+    var lastIdx = this.slides.length;
+    var lastStep = this.slides[lastIdx - 1].$$('.incremental > *').length;
+    this.setCursor(lastIdx, lastStep);
+  }
+
+  Dz.toggleView = function() {
+    this.html.classList.toggle("view");
+
+    if (this.html.classList.contains("view")) {
+      $("section[aria-selected]").scrollIntoView(true);
+    }
+  }
+
+  Dz.setSlide = function(aIdx) {
+    this.idx = aIdx;
+    var old = $("section[aria-selected]");
+    var next = $("section:nth-of-type("+ this.idx +")");
+    if (old) {
+      old.removeAttribute("aria-selected");
+      var video = old.$("video");
+      if (video) {
+        video.pause();
+      }
+    }
+    if (next) {
+      next.setAttribute("aria-selected", "true");
+      if (this.html.classList.contains("view")) {
+        next.scrollIntoView();
+      }
+      var video = next.$("video");
+      if (video && !!+this.params.autoplay) {
+        video.play();
+      }
+    } else {
+      // That should not happen
+      this.idx = -1;
+      // console.warn("Slide doesn't exist.");
+    }
+  }
+
+  Dz.setIncremental = function(aStep) {
+    this.step = aStep;
+    var old = this.slides[this.idx - 1].$('.incremental > *[aria-selected]');
+    if (old) {
+      old.removeAttribute('aria-selected');
+    }
+    var incrementals = $$('.incremental');
+    if (this.step <= 0) {
+      $$.forEach(incrementals, function(aNode) {
+        aNode.removeAttribute('active');
+      });
+      return;
+    }
+    var next = this.slides[this.idx - 1].$$('.incremental > *')[this.step - 1];
+    if (next) {
+      next.setAttribute('aria-selected', true);
+      next.parentNode.setAttribute('active', true);
+      var found = false;
+      $$.forEach(incrementals, function(aNode) {
+        if (aNode != next.parentNode)
+          if (found)
+            aNode.removeAttribute('active');
+          else
+            aNode.setAttribute('active', true);
+        else
+          found = true;
+      });
+    } else {
+      setCursor(this.idx, 0);
+    }
+    return next;
+  }
+
+  Dz.goFullscreen = function() {
+    var html = $('html'),
+        requestFullscreen = html.requestFullscreen || html.requestFullScreen || html.mozRequestFullScreen || html.webkitRequestFullScreen;
+    if (requestFullscreen) {
+      requestFullscreen.apply(html);
+    }
+  }
+  
+  Dz.setProgress = function(aIdx, aStep) {
+    var slide = $("section:nth-of-type("+ aIdx +")");
+    if (!slide)
+      return;
+    var steps = slide.$$('.incremental > *').length + 1,
+        slideSize = 100 / (this.slides.length - 1),
+        stepSize = slideSize / steps;
+    this.progressBar.style.width = ((aIdx - 1) * slideSize + aStep * stepSize) + '%';
+  }
+  
+  Dz.postMsg = function(aWin, aMsg) { // [arg0, [arg1...]]
+    aMsg = [aMsg];
+    for (var i = 2; i < arguments.length; i++)
+      aMsg.push(encodeURIComponent(arguments[i]));
+    aWin.postMessage(aMsg.join(" "), "*");
+  }
+  
+  function init() {
+    Dz.init();
+    window.onkeydown = Dz.onkeydown.bind(Dz);
+    window.onresize = Dz.onresize.bind(Dz);
+    window.onhashchange = Dz.onhashchange.bind(Dz);
+    window.onmessage = Dz.onmessage.bind(Dz);
+  }
+
+  window.onload = init;
+</script>
+
+
+<script> // Helpers
+  if (!Function.prototype.bind) {
+    Function.prototype.bind = function (oThis) {
+
+      // closest thing possible to the ECMAScript 5 internal IsCallable
+      // function 
+      if (typeof this !== "function")
+      throw new TypeError(
+        "Function.prototype.bind - what is trying to be fBound is not callable"
+      );
+
+      var aArgs = Array.prototype.slice.call(arguments, 1),
+          fToBind = this,
+          fNOP = function () {},
+          fBound = function () {
+            return fToBind.apply( this instanceof fNOP ? this : oThis || window,
+                   aArgs.concat(Array.prototype.slice.call(arguments)));
+          };
+
+      fNOP.prototype = this.prototype;
+      fBound.prototype = new fNOP();
+
+      return fBound;
+    };
+  }
+
+  var $ = (HTMLElement.prototype.$ = function(aQuery) {
+    return this.querySelector(aQuery);
+  }).bind(document);
+
+  var $$ = (HTMLElement.prototype.$$ = function(aQuery) {
+    return this.querySelectorAll(aQuery);
+  }).bind(document);
+
+  $$.forEach = function(nodeList, fun) {
+    Array.prototype.forEach.call(nodeList, fun);
+  }
+
+</script>
+<!-- vim: set fdm=marker: }}} -->
