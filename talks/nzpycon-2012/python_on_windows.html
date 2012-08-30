@@ -18,6 +18,8 @@
         <li>First port of Python for Windows
         <li>pywin32 grew organically
         <li>Member of the Python Software Foundation
+        <li>Live in Melbourne, work for Mozilla.
+        <li>Grateful to be invited!
     </ul>
 </section>
 
@@ -25,11 +27,8 @@
     <h3>Python on Windows is popular</h3>
     <ul class="incremental">
         <li>Not just used by you Mac fans!
-        <li>Hard to get direct comparisons.
-        <li>750,000 - 1,000,000 installer downloads per month.
-        <li>Python 3 popular - around 1/2 those downloads.
-        <li>Most recent pywin32 - Python 2.x=160,000; 3.x=51,000
-        <li>Nearly 1000 downloads for Python 2.3!
+        <li>Nearly 1,000,000 installer downloads per month<small> - but hard to get direct comparisons.</small>
+        <li>Python 3 around 1/2 of those.
         <li>Plus ActiveState, Enthought, etc
     </ul>
 </section>
@@ -115,16 +114,21 @@
 </section>
 
 <section>
-    <h3>You get what you pay for!</h3>
-    <p>Mark's free opinion</p>
+    <h3>Mark's free opinion<br><small> - you get what you pay for!</small></h3>
     <ul class="incremental">
         <li>Many apps will be HTML5
         <li>Browser-based APIs for most hardware resources
         <li>IndexedDB, Session Storage, App Cache, etc
         <li>All browsers creating "apps" concept - no "chrome"
+    </ul>
+</section>
+
+<section>
+    <h3>Mark's free opinion<br><small>... until someone tells me to stop!</small></h3>
+    <ul class="incremental">
         <li>Mozilla's Boot2Gecko a case in point.
-        <li>But that's a long time away
-        <li>And not for all apps
+        <li>But the HTML-only future is a long way off.
+        <li>And not for all apps.
         <li>Your jobs are safe :)
     </ul>
 </section>
@@ -140,32 +144,44 @@
         <li>First-class support for Windows.
             <small>Eg: Unicode APIs are preferred to offer seamless Unicode experience.</small>
         <li>Tends to avoid platform-specific functionality
-            <small>Native windows functions are used to create a cross-platform environment</small>
-        <li>Not much Windows specific functionality is exposed
-        <li>ctypes or pywin32 is often used to fill in the gaps
+            <br><small>Native windows functions are used to create a cross-platform environment</small>
+    </ul>
+</section>
+
+<section>
+    <h3>CPython on Windows</h3>
+    <ul class="incremental">
+        <li>Not much Windows specific functionality is exposed.
+        <br><small>Just Windows specific implementations of cross-platform features.</small></li>
+        <li>ctypes or pywin32 is often used to fill in the gaps.
     </ul>
 <details>Much of CPython uses unicode windows apis</details>
 </section>
 
 <section>
-    <h3>Python for Windows Extensions</h3>
+    <h3>Python for Windows Extensions (pywin32)</h3>
     <div class="incremental">
         <p>Expose Windows specific features</p>
         <p>Broad coverage<br><small>native IO, services, networking, COM, UI, etc</small></p>
         <p>stable and mature</p>
-        <p>Leveraged by many other projects;<br><small>things like twisted, mercurial etc all take advantage of pywin32 if found.</small></p>
+    </div>
+</section>
+
+<section>
+    <h3>Python for Windows Extensions (pywin32)</h3>
+    <p>Leveraged by many other projects;<br><small>things like twisted, mercurial etc all take advantage of pywin32 if found.</small></p>
+    <div class="incremental">
         <p>Downside: fairly large, not easy_install-able</p>
     </div>
 </section>
 
 <section>
     <h3>Cross-platform?</h3>
-        <p>Python has rich cross-platform support - why target Windows specific features?</p>
+        <p>Python has rich cross-platform support<small> - so why target Windows specific features?</small></p>
         <ul class="incremental">
             <li>Provide good experience for administrators.
             <li>Provide good experience for users.
             <li>Integrate with other languages and development environments.
-            <li>Provide a good experience for administrators
         </ul>
     <details>So if Python is cross-platform, why do I care about Windows specific features?</details>
 </section>
@@ -176,7 +192,7 @@
         <li>NTLM/Kerberos<br><small>admins like the security of not providing passwords to applications.</small>
         <li>Integrate with existing user roles<br><small>admins use Windows tools to grant access</small>
         <li>Implement 'daemon' as a service<br><small>give administrators a single control point.</small>
-        <li>Integrated performance monitoring
+        <li>Integrated performance monitoring, event logging, etc
     </ul>
 </section>
 
@@ -206,7 +222,7 @@
         <li>Start a process on a remote computer
         <li>Schedule a process
         <li>Reboot a computer
-        <li>Query event log
+        <li>Query event log, etc
     </ul>
 </section>
 
@@ -261,7 +277,7 @@ for s in stopped:
     <h3>WMI availability</h3>
     <ul class="incremental">
         <li>Available on Windows 2000 and later.
-        <li>Comes with pywin32 but maintained by Tim Golden<br><small>it requires pywin32's COM support</small>
+        <li>A layer on top of pywin32. <small>Technically can be used in pure pywin32, but this isn't advised</small>
     </ul>
 </section>
 
@@ -309,51 +325,51 @@ for s in stopped:
 
 <section>
     <h3>Launcher Shebang processing</h3>
-    <div class="incremental">
-        <p>Compatible with *nix shebang lines.</p>
-        <ul>
-            <li>&nbsp;&nbsp;<code>#! /usr/bin/python</code>
-            <li>&nbsp;&nbsp;<code>#! /usr/bin/env python</code>
-        </ul>
-        <p>Windows specific shebang lines.</p>
-        <ul>
-            <li>&nbsp;<code>#! c:\python27\python.exe</code>
-        </ul>
-    </div>
+    <p class="incremental">
+        <span>
+            Compatible with *nix shebang lines.
+            <br><code>#! /usr/bin/python</code>
+            <br><code>#! /usr/bin/env python</code>
+        </span>
+        <span>
+            <br>Windows specific shebang lines.
+            <br><code>#! c:\python27\python.exe</code>
+        </span>
+        <span>
+            Minimal shebang lines
+            <br><code>#! python3</code>
+        </span>
+    </p>
 </section>
 
 <section>
     <h3>Version specific shebang lines</h3>
     <div class="incremental">
-        <p>Symlinks are often used on Linux to specify a version.</p>
-        <ul>
-            <li>&nbsp;&nbsp;<code>#! /usr/bin/python3</code>
-        </ul>
-        <p>Launcher supports version numbers too</p>
-        <ul>
-            <li>&nbsp;&nbsp;<code>#! /usr/bin/python3</code>
-            <li>&nbsp;&nbsp;<code>#! /usr/bin/python2.7</code>
-        </ul>
+        <p>Symlinks are often used on Linux to specify a version.
+            <br><code>#! /usr/bin/python3</code>
+        </p>
+        <p>Launcher handles this too
+            <br><code>#! /usr/bin/python3</code>
+            <br><code>#! /usr/bin/python2.7</code>
+        </p>
     </div>
 </section>
 
 <section>
     <h3>Launcher on the command-line</h3>
     <div class="incremental">
-        <div>
-            <p><code>c:\&gt;&nbsp;py script.py</code><br>
-            Launches the latest installed Python 2.x<br>
-            No need for them all to be on the PATH</p>
-        </div>
-        <div>
-            <p><code>c:\&gt;&nbsp;py -3.2 script.py</code><br>
-            Launches Python 3.2</p>
-        </div>
-        <div>
-            <p><code>c:\&gt;&nbsp;py -3.3-32 script.py</code><br>
-            Launches a 32bit version of Python 3.3</p>
-        </div>
+        <p><code>c:\&gt;&nbsp;py script.py</code><br>
+           Launches the latest installed Python 2.x<small> - No need for them all to be on the PATH</small>
+        </p>
+        <p><code>c:\&gt;&nbsp;py -3.2 script.py</code>
+            <br><code>c:\&gt;&nbsp;py -3.3-32 script.py</code>
+            <br>Launch 3.2, 32bit 3.3
+        </p>
     </div>
+    <details>
+        The 64bit version of Python is always preferred if
+        both are found.  -32 allows you to override this.
+    </details>
 </section>
 
 <section>
@@ -414,16 +430,17 @@ for s in stopped:
 <section>
     <h3>Summary</h3>
     <ul class="incremental">
-        <li>Python is extremely popular on Windows.
-        <li>Will continue to follow new innovations on the platform.
-        <li>Will continue to work with older "innovations" on the platform.
+        <li>Extremely popular on Windows.
+        <li>Continues to follow new innovations on the platform.
+        <li>Continues to work with older "innovations" too.
         <li>Continues to listen to users about what support is necessary.
-        <li>Can make working with Windows less painful.
+        <li>Makes working with Windows less painful.
     </ul>
 </section>    
 
 <section>
     <h2>Questions?</h2>
+    <footer>Mark Hammond<br><small>mhammond@skippinet.com.au @skippyhammond</small></footer>
 </section>
 </body>
 
@@ -442,6 +459,19 @@ pre {
     overflow: hidden;
 }
 
+section, .view head > title {
+      font-family: 'Verdana', arial, serif;
+      font-size: 30px;
+}
+
+h3 {
+    font-size: 50px;
+}
+
+li {
+    font-size: 40px;
+}
+
 </style>
 <!-- Define the style of your presentation -->
 
@@ -450,7 +480,7 @@ pre {
   body, .view section { background-color: white; border-radius: 12px }
   /* A section is a slide. It's size is 800x600, and this will never change */
   section, .view head > title {
-      // font-family: 'Oswald', arial, serif;
+      font-family: 'Oswald', arial, serif;
       font-size: 30px;
   }
 
