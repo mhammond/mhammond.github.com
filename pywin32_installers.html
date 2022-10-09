@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>pywin32 .exe installers are deprecated</title>
+</head>
+<body>
+<h1>pywin32 .exe installers are deprecated</h1>
+
+<p>
+    The <a href="https://github.com/mhammond/pywin32/">pywin32</a> project has
+    traditionally offered .exe files for installation, but this is going to
+    stop soon.
+</p>
+<p>
+    <a href="https://github.com/pypa/distutils/pull/170">Support for building these
+    installers has been removed from setuptools</a>; you can't make them with
+    recent versions. So at some point in the future they can't be provided.
+</p>
+<p>
+    <a href="https://pypi.org/project/pywin32/">You should move to installation via <code>pip</code></a>.
+</p>
+<ul>
+    <li>
+        To install via <code>pip</code>, execute
+        <pre>python -m pip install pywin32</pre>
+    </li>
+    <li>
+        To upgrade, execute
+        <pre>python -m pip install pywin32 --upgrade</pre>
+    </li>
+
+    <li>
+        If you want Windows integrations (context menu, shortcuts etc) you should execute
+        <pre>python Scripts\pywin32_postinstall.py</pre>
+        from the root of your Python installation.
+    </li>
+</ul>
+
+</body>
